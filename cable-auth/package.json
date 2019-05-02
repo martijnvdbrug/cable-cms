@@ -1,0 +1,25 @@
+{
+  "name": "my-cms-auth",
+  "description": "Custom authentication for NetlifyCMS",
+  "engines": {
+    "node": "8"
+  },
+  "scripts": {
+    "serve": "ts-node-dev src/dev-server.ts"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "randomstring": "^1.1.5",
+    "simple-oauth2": "^2.2.1"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.17.0",
+    "@types/node": "^11.13.8",
+    "@types/node-fetch": "^2.3.3",
+    "body-parser": "^1.19.0",
+    "ts-node": "^8.1.0",
+    "ts-node-dev": "^1.0.0-pre.33",
+    "typescript": "^3.4.5"
+  }
+}
