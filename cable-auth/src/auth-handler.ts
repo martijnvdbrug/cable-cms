@@ -1,4 +1,5 @@
 import express = require('express');
+require('dotenv').config();
 
 // TODO: token to env
 // TODO: add a test-site with netlifycms admin
@@ -26,14 +27,14 @@ export const app = express();
 
 app.get('/auth', (req, res) => {
   return res.send(getScript('success', {
-    token: `2c410d5763fad5cb3ea5d732c272647da64bb8cd`,
+    token: `${process.env.token}`,
     provider: 'github'
   }));
 });
 
 app.post('/token', (req, res) => {
   return res.send({
-    token: `2c410d5763fad5cb3ea5d732c272647da64bb8cd`,
+    token: `${process.env.token}`,
     provider: 'github'
   });
 });

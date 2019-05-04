@@ -4,3 +4,4 @@ dist/
 .firebaserc
 .idea
 .git
+.env
