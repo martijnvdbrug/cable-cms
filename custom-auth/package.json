@@ -5,7 +5,7 @@
     "node": "8"
   },
   "scripts": {
-    "deploy": "copyfiles ../netlify-cms/packages/netlify-cms/dist/netlify-cms.js ../../studiofarley/admin/netlify-cms.js"
+    "deploy": "copyfiles -f ../netlify-cms/packages/netlify-cms/dist/netlify-cms.js ../../studiofarley/admin/"
   },
   "dependencies": {},
   "devDependencies": {
