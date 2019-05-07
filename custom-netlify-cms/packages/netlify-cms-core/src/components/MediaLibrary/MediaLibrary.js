@@ -253,7 +253,7 @@ class MediaLibrary extends React.Component {
     const strippedQuery = query.replace(/ /g, '');
     const matches = fuzzy.filter(strippedQuery, files, { extract: file => file.name });
     const matchFiles = matches.map((match, queryIndex) => {
-      const file = files[match.index];
+      const file = files[match.authHandler];
       return { ...file, queryIndex };
     });
     return matchFiles;

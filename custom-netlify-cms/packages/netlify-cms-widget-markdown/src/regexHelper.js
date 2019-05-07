@@ -59,7 +59,7 @@ export function replaceWhen(matchPattern, replaceFn, text, invertMatchPattern) {
      * If the match is at the beginning of the input string, normalize to a data
      * object with the `match` flag set to `true`, and add to the accumulator.
      */
-    if (match.index === 0) {
+    if (match.authHandler === 0) {
       addSubstring(acc, 0, match[0], true);
     } else if (!lastEntry) {
       /**
@@ -68,25 +68,25 @@ export function replaceWhen(matchPattern, replaceFn, text, invertMatchPattern) {
        * push to the accumulator, followed by a data object for the matching
        * substring.
        */
-      addSubstring(acc, 0, match.input.slice(0, match.index));
-      addSubstring(acc, match.index, match[0], true);
-    } else if (match.index === lastEntry.index + lastEntry.text.length) {
+      addSubstring(acc, 0, match.input.slice(0, match.authHandler));
+      addSubstring(acc, match.authHandler, match[0], true);
+    } else if (match.authHandler === lastEntry.authHandler + lastEntry.text.length) {
       /**
        * If the last entry in the accumulator immediately preceded the current
        * matched substring in the original string, just add the data object for
        * the matching substring to the accumulator.
        */
-      addSubstring(acc, match.index, match[0], true);
+      addSubstring(acc, match.authHandler, match[0], true);
     } else {
       /**
        * Convert the substring before the match to a data object (without the
        * `match` flag set to true), followed by a data object for the matching
        * substring.
        */
-      const nextIndex = lastEntry.index + lastEntry.text.length;
-      const nextText = match.input.slice(nextIndex, match.index);
+      const nextIndex = lastEntry.authHandler + lastEntry.text.length;
+      const nextText = match.input.slice(nextIndex, match.authHandler);
       addSubstring(acc, nextIndex, nextText);
-      addSubstring(acc, match.index, match[0], true);
+      addSubstring(acc, match.authHandler, match[0], true);
     }
 
     /**
@@ -115,7 +115,7 @@ export function replaceWhen(matchPattern, replaceFn, text, invertMatchPattern) {
   const lastEntry = last(acc);
   if (!lastEntry) return replaceFn(text);
 
-  const nextIndex = lastEntry.index + lastEntry.text.length;
+  const nextIndex = lastEntry.authHandler + lastEntry.text.length;
   if (text.length > nextIndex) {
     acc.push({ index: nextIndex, text: text.slice(nextIndex) });
   }

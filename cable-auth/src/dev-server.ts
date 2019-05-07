@@ -1,7 +1,7 @@
 import express = require('express');
 import cors = require('cors');
 import * as bodyParser from 'body-parser';
-import {authHandler} from './auth-handler';
+import {authHandler} from './handlers';
 
 export const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
