@@ -1,19 +1,20 @@
 import express = require('express');
-import cors = require('cors');
 require('dotenv').config();
 
-export const app = express();
-app.use(cors());
+export const authHandler = express();
 
-app.post('/auth', (req, res) => {
-
-console.log('BODIETJE', req);
+authHandler.post('/auth', (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  if (!password || !email) {
+    res.send(500, `email and password are needed to authenticate!`)
+  }
   return res.send({
     token: `${process.env.token}`,
     provider: 'github'
   });
 });
 
-app.get('/', (req, res) => {
+authHandler.get('/', (req, res) => {
   res.redirect('auth');
 });

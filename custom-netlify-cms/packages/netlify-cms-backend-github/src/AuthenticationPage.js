@@ -83,7 +83,14 @@ export default class GitHubAuthenticationPage extends React.Component {
     };
 
     const url = `${this.props.base_url}${this.props.authEndpoint}`;
-    fetch(url, { method: 'POST', body }).then(res => {
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    }).then(res => {
       res.json().then(data => {
         this.props.onLogin(data);
       });
