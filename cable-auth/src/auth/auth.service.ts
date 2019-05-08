@@ -1,4 +1,4 @@
-import {DatastoreClient} from '../lib/datastore.client';
+import {DatastoreClient} from '../datbase/datastore.client';
 
 export namespace AuthService {
 
