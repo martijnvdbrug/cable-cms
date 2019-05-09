@@ -1,29 +1,30 @@
-import {DatastoreClient} from '../datbase/datastore.client';
-import {DatabaseClientInterface} from '../interface/database-client.interface';
-import {EntityInterface} from '../interface/entity.interface';
+import {DatastoreClient} from '../database/datastore.client';
+import {DatabaseClientInterface} from '../database/database-client.interface';
+import {EntityInterface} from '../database/entity.interface';
 
 export class User implements EntityInterface<User> {
 
-  static client: DatabaseClientInterface<User> = new DatastoreClient('User');
+  private static client: DatabaseClientInterface<User> = new DatastoreClient('User');
 
-  public id: string;
+  get id(): string { // Only getter, because id should always be email
+    return this.email;
+  }
   public email: string;
   public passwordHash: string;
+  public token: string;
 
   static get(id: string): Promise<User> {
     return User.client.get(id);
   }
 
-  static new(entity: Partial<User>): Promise<User> {
-    return User.client.save(entity);
-  }
-
-  save(): Promise<User> {
-    return User.client.save({
+  async save(): Promise<User> {
+    await User.client.save({
       id: this.id,
       email: this.email,
-      passwordHash: this.passwordHash
+      passwordHash: this.passwordHash,
+      token: this.token
     });
+    return this;
   }
 
 

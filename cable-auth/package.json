@@ -7,7 +7,7 @@
   "scripts": {
     "env": "export GOOGLE_APPLICATION_CREDENTIALS=$HOME/.config/gcloud/application_default_credentials.json && export GCLOUD_PROJECT='cable-cms'",
     "serve": "yarn env && yarn ts-node-dev src/dev-server.ts",
-    "test": "yarn env && yarn ts-node-dev test/auth.spec.ts"
+    "test": "yarn env && ts-mocha test/auth.spec.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -18,9 +18,13 @@
   },
   "devDependencies": {
     "@types/body-parser": "^1.17.0",
+    "@types/mocha": "^5.2.6",
     "@types/node": "^11.13.8",
     "@types/node-fetch": "^2.3.3",
     "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4",
+    "ts-mocha": "^6.0.0",
     "ts-node": "^8.1.0",
     "ts-node-dev": "^1.0.0-pre.33",
     "typescript": "^3.4.5"

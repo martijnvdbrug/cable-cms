@@ -1,4 +1,5 @@
 import express = require('express');
+import {Env} from '../env';
 require('dotenv').config();
 
 export const authHandler = express();
@@ -10,7 +11,7 @@ authHandler.post('/auth', (req, res) => {
     res.send(500, `email and password are needed to authenticate!`)
   }
   return res.send({
-    token: `${process.env.token}`,
+    token: `${Env.token}`,
     provider: 'github'
   });
 });

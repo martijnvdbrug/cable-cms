@@ -1,13 +1,8 @@
-import {DatastoreClient} from '../datbase/datastore.client';
+import {DatastoreClient} from '../database/datastore.client';
 
 export namespace AuthService {
 
-  const userEntityKind = 'User';
-  const datastoreClient = new DatastoreClient();
-
-  export function validateCredentials(email: string, passwordHash) {
-
-
+  export function validateCredentials(email: string, passwordHash: string) {
   }
 
 }
