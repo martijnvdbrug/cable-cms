@@ -1,13 +1,15 @@
 {
   "name": "my-cms-auth",
   "description": "Custom authentication for NetlifyCMS",
+  "license": "UNLICENSED",
+  "main": "dist/handlers/index.js",
   "engines": {
-    "node": "10"
+    "node": "8"
   },
   "scripts": {
     "env": "export GOOGLE_APPLICATION_CREDENTIALS=$HOME/.config/gcloud/application_default_credentials.json && export GCLOUD_PROJECT='cable-cms'",
     "serve": "yarn env && yarn ts-node-dev src/dev-server.ts",
-    "deploy": "yarn env && gcloud functions deploy authHandler --runtime node10 --trigger-http",
+    "deploy": "yarn env && yarn tsc && gcloud functions deploy authHandler --runtime nodejs8 --trigger-http --region=europe-west1 --project=cable-cms --verbosity debug",
     "test": "yarn env && ts-mocha test/auth.spec.ts",
     "create:user": "yarn env && ts-node scripts/create-user"
   },
