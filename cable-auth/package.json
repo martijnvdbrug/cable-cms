@@ -7,7 +7,8 @@
   "scripts": {
     "env": "export GOOGLE_APPLICATION_CREDENTIALS=$HOME/.config/gcloud/application_default_credentials.json && export GCLOUD_PROJECT='cable-cms'",
     "serve": "yarn env && yarn ts-node-dev src/dev-server.ts",
-    "test": "yarn env && ts-mocha test/auth.spec.ts"
+    "test": "yarn env && ts-mocha test/auth.spec.ts",
+    "create:user": "yarn env && ts-node scripts/create-user"
   },
   "dependencies": {
     "@google-cloud/datastore": "^3.1.2",
