@@ -10,6 +10,7 @@
     "test": "yarn env && ts-mocha test/auth.spec.ts"
   },
   "dependencies": {
+    "@google-cloud/datastore": "^3.1.2",
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "express": "^4.16.4",

@@ -1,12 +1,21 @@
 import {User} from '../src/auth/user';
+import {Env} from '../src/env';
+const expect = require('chai').expect;
 
-describe('#sum()', () => {
+describe('Env', () => {
 
   // test a functionality
-  it('Test user exists', async() => {
+  it('Should have Google Project', async() => {
+    expect(Env.googleProject).to.equal('cable-cms');
+  })
 
+});
+
+describe('Test User', () => {
+
+  // test a functionality
+  it('should exist', async() => {
     const user = await User.get('test@pinelab.com');
-    console.log(user);
     expect(user.email).to.equal('test@pinelab.com');
   })
 

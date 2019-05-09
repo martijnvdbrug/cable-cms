@@ -7,7 +7,6 @@ export class DatastoreClient<T> implements DatabaseClientInterface<T> {
   datastore: Datastore;
 
   constructor(private kind: string) {
-    console.log(Env.googleProject);
     this.datastore = new Datastore({
       projectId: Env.googleProject
     });
@@ -31,6 +30,7 @@ export class DatastoreClient<T> implements DatabaseClientInterface<T> {
 
     const key = this.datastore.key([this.kind, entityId]);
     // Saves the entity
-    return this.datastore.get(key);
+    const [entity] = await this.datastore.get(key);
+    return entity;
   }
 }
