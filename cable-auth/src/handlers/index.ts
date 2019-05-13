@@ -25,6 +25,10 @@ authHandler.post('/auth', async (req, res) => {
   }
 });
 
+authHandler.get('/status', (req, res) => {
+  res.send(`ok`)
+});
+
 authHandler.get('/', (req, res) => {
   res.redirect('auth');
 });
