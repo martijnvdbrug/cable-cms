@@ -1,9 +1,15 @@
 import express = require('express');
+import cors = require('cors');
+import * as bodyParser from 'body-parser';
 import {UserService} from '../user/user.service';
 
 require('dotenv').config();
 
 export const authHandler = express();
+
+authHandler.use(bodyParser.urlencoded({ extended: true }));
+authHandler.use(bodyParser.json());
+authHandler.use(cors());
 
 authHandler.post('/auth', async (req, res) => {
   const email = req.body.email;

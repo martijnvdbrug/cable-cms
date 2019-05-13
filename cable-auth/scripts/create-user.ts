@@ -1,7 +1,6 @@
-import {Env} from '../src/env';
 import {User} from '../src/user/user';
 
-(async() => {
+(async () => {
 
   const email = process.argv[2];
   const password = process.argv[3];
@@ -18,5 +17,5 @@ import {User} from '../src/user/user';
   });
   await user.save();
 
-  process.exit(0)
+  process.exit(0);
 })();
