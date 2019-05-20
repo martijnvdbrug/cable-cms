@@ -4,6 +4,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import styled from '@emotion/styled';
 import {AuthenticationPage, buttons, colors, colorsRaw, lengths, shadows} from 'netlify-cms-ui-default';
 import {partial} from "lodash";
+import * as crypto from 'crypto';
 
 const LoginButton = styled.button`
   ${buttons.button};
@@ -65,11 +66,12 @@ export default class GitHubAuthenticationPage extends React.Component {
 
     const { email, password } = this.state;
     const errors = {};
+
     if (!email) {
-      errors.email = 'Make sure to enter your email.';
+      errors.email = 'Emailadres is verplict';
     }
     if (!password) {
-      errors.password = 'Please enter your password.';
+      errors.password = 'Wachtwoord is verplicht';
     }
 
     if (Object.keys(errors).length > 0) {
@@ -79,7 +81,7 @@ export default class GitHubAuthenticationPage extends React.Component {
 
     const body = {
       email,
-      password
+      password: crypto.createHash('md5').update(password).digest('hex')
     };
 
     const url = `${this.props.base_url}${this.props.authEndpoint}`;
@@ -92,6 +94,11 @@ export default class GitHubAuthenticationPage extends React.Component {
       body: JSON.stringify(body)
     }).then(res => {
       res.json().then(data => {
+        if (data.error) {
+          errors.email = 'Onjuist emailadres of wachtwoord';
+          this.setState({ errors });
+          return;
+        }
         this.props.onLogin(data);
       });
     });

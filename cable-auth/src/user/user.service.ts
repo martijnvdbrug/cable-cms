@@ -3,23 +3,22 @@ import crypto = require('crypto');
 
 export class UserService {
 
-  static async isValid(email: string, passwordHash: string): Promise<boolean> {
-    const user = await User.get(email);
-    if (!user) {
-      return false;
-    }
-    return user.passwordHash === passwordHash;
-  }
-
   static hash(password: string): string {
     return crypto.createHash('md5').update(password).digest('hex');
   }
 
-  static async getToken(email: string, passwordHash: string): Promise<string> {
-    if (await UserService.isValid(email, passwordHash)) {
-      return (await User.get(email)).token;
+  /**
+   * Validates password and host for email. If valid, returns token
+   * @param email
+   * @param passwordHash
+   * @param host
+   */
+  static async getToken(email: string, passwordHash: string, host: string): Promise<string> {
+    const user = await User.get(email);
+    if ( !user.isAllowedForHost(host) || !user.isValid(passwordHash)) {
+      throw new Error(`User ${email} is not allowed for host ${host} or password is invalid`);
     }
-    throw new Error(`Invalid password for ${email}`);
+    return user.token;
   }
 
 }

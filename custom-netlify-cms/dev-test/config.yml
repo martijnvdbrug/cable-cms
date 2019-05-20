@@ -1,7 +1,7 @@
 backend:
   name: github
   repo: martijnvdbrug/studiofarley # Your username and repository
-  base_url: http://localhost:8081 # The base URL for your Firebase Function
+  base_url: https://europe-west1-cable-cms.cloudfunctions.net/authHandler # The base URL for your Firebase Function
   auth_endpoint: /auth # The path to the OAuth endpoint of the function
 
 site_url: https://example.com

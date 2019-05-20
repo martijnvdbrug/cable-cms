@@ -11,6 +11,7 @@ export class User implements EntityInterface<User> {
   public email: string;
   public passwordHash: string;
   public token: string;
+  public host: string;
 
   get id(): string { // Only getter, because id should always be email
     return this.email;
@@ -20,6 +21,7 @@ export class User implements EntityInterface<User> {
     this.passwordHash = input.passwordHash ? input.passwordHash : UserService.hash(input.password);
     this.email = input.email;
     this.token = input.token;
+    this.host = input.host.toLowerCase();
   }
 
   static async get(email: string): Promise<User> {
@@ -35,9 +37,24 @@ export class User implements EntityInterface<User> {
       id: this.id,
       email: this.email,
       passwordHash: this.passwordHash,
-      token: this.token
+      token: this.token,
+      host: this.host
     });
     return this;
+  }
+
+  isValid(passwordHash: string): boolean {
+    return this.passwordHash === passwordHash;
+  }
+
+  isAllowedForHost(host: string): boolean {
+    if ( !host || !this.host) {
+      return false;
+    } else if (this.host === '*') {
+      return true;
+    } else {
+      return host.toLowerCase().indexOf(this.host) > -1;
+    }
   }
 
 

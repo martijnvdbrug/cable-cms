@@ -3,4 +3,5 @@ export interface UserInputInterface {
   password?: string
   passwordHash?: string
   token: string
+  host: string
 }
