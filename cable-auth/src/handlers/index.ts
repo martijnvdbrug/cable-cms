@@ -14,7 +14,7 @@ authHandler.use(cors());
 authHandler.post('/auth', async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
-  const host = req.get('host');
+  const host = req.get('origin');
   if (!password || !email) {
     res.send(500, `email and password are needed to authenticate!`);
   }
